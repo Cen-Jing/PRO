@@ -179,13 +179,7 @@ function Globe({ globeConfig, data }: WorldProps) {
       .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
       .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
       .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
-      .arcColor((e: any) => {
-        const arc = e as Position;
-        if (arc.startColor && arc.endColor) {
-          return [arc.startColor, arc.endColor];  // 返回渐变色数组
-        }
-        return arc.color || arc.startColor || arc.endColor || '#ffffff';  // 返回单一颜色
-      })
+      .arcColor(() => '#1E90FF')  // 使用统一的蓝色
       .arcAltitude((e) => (e as { arcAlt: number }).arcAlt * 1)
       .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
       .arcDashLength(defaultProps.arcLength)
