@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Color, Scene, Fog, PerspectiveCamera} from "three";
+import { Color, Scene, Fog, PerspectiveCamera, Group } from "three";
 import ThreeGlobe from "three-globe";
 import { useThree, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
@@ -43,6 +43,7 @@ export type GlobeConfig = {
   shininess?: number;
   polygonColor?: string;
   ambientLight?: string;
+  Group?: string;
   ambientLightIntensity?: number;
   directionalLeftLight?: string;
   directionalLeftLightIntensity?: number;
@@ -71,7 +72,7 @@ interface WorldProps {
 
 function Globe({ globeConfig, data }: WorldProps) {
   const globeRef = useRef<ThreeGlobe | null>(null);
-  const groupRef = useRef<THREE.Group>();
+  const groupRef = useRef<Group | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   const defaultProps = {
@@ -99,7 +100,7 @@ function Globe({ globeConfig, data }: WorldProps) {
   useEffect(() => {
     if (!globeRef.current && groupRef.current) {
       globeRef.current = new ThreeGlobe();
-      (groupRef.current as Position).add(globeRef.current);
+      (groupRef.current as Group).add(globeRef.current);
       setIsInitialized(true);
     }
   }, []);
@@ -178,8 +179,8 @@ function Globe({ globeConfig, data }: WorldProps) {
       .arcStartLng((d) => (d as { startLng: number }).startLng * 1)
       .arcEndLat((d) => (d as { endLat: number }).endLat * 1)
       .arcEndLng((d) => (d as { endLng: number }).endLng * 1)
-      .arcColor((e: Position) => {
-        const arc = e as { startColor?: string; endColor?: string; color?: string };
+      .arcColor((e: any) => {
+        const arc = e as Position;
         if (arc.startColor && arc.endColor) {
           return [arc.startColor, arc.endColor];  // 返回渐变色数组
         }
