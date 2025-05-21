@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const Globe = dynamic(() => import('@/components/ui/globe').then(mod => mod.World), {
   ssr: false,
-  loading: () => <div className="w-full h-[100vh] md:h-[100vh] bg-black" />
+  loading: () => <div className="w-full h-[100vh] md:h-[100vh] " />
 });
 
 // 定义统一的颜色方案
@@ -204,7 +204,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-white">
+    <main className="flex min-h-screen flex-col items-center justify-center">
       <div className="w-full h-[100vh] md:h-[100vh] max-w-[1000px] mx-auto px-4 z-100">
         <Globe
           globeConfig={{
