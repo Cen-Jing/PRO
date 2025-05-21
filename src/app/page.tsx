@@ -200,7 +200,7 @@ export default function Home() {
   }, []);
 
   if (!isMounted) {
-    return <div className="w-[1000px] h-[100vh] md:h-[100vh] bg-white" />;
+    return <div className="w-[1000px] h-[100vh] md:h-[100vh]" />;
   }
 
   return (
