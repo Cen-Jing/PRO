@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const Globe = dynamic(() => import('@/components/ui/globe').then(mod => mod.World), {
   ssr: false,
-  loading: () => <div className="w-full h-[100vh] md:h-[100vh] " />
+  loading: () => <div className="w-full h-[100vh] md:h-[100vh] bg-black" />
 });
 
 // 定义统一的颜色方案
